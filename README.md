@@ -2,7 +2,7 @@
 
 > ⚠️ Be warned. This has A LOT of dependencies and js gets stale at warp-speed.
 
-This repo has some examples I've followed along with and slightly modified. Nothing much different to the `elm-land` repo, but handy to have them offline. More examples can be [found here](https://github.com/elm-land/elm-land/tree/main/examples).
+This repo has [some examples](https://elm.land/guide/) I've followed along with and slightly modified. Nothing much different to the [`elm-land` repo](https://github.com/elm-land/elm-land), but handy to have them offline. More examples can be [found here](https://github.com/elm-land/elm-land/tree/main/examples).
 
 Elm Land is fine for quicker builds, but it's potentially "dependency hell" as it's already showing vulnerabilities needing an `audit fix` (it'll update to an out-of-date version). Remember the rules of [Simplicity](https://pragprog.com/titles/dtcode/simplicity/).
 
