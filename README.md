@@ -4,7 +4,7 @@
 
 This repo has [some examples](https://elm.land/guide/) I've followed along with and slightly modified. Nothing much different to the [`elm-land` repo](https://github.com/elm-land/elm-land), but handy to have them offline. More examples can be [found here](https://github.com/elm-land/elm-land/tree/main/examples).
 
-Elm Land is fine for quicker builds, but it's potentially "dependency hell" as it's already showing vulnerabilities needing an `audit fix` (it'll update to an out-of-date version). Remember the rules of [Simplicity](https://pragprog.com/titles/dtcode/simplicity/).
+Elm Land is fine for quicker builds, but it's potentially "dependency hell" as it's already showing vulnerabilities needing an `audit fix` (it'll update to an out-of-date version). Remember the rules of [Simplicity](https://pragprog.com/titles/dtcode/simplicity/). Hopefully these don't matter _too_ much, as the output is (mostly?) pure Elm.
 
 Fine for prototyping, reasonably stable, but keep things as simple as possible, and consider using stock Elm for safer maintenance.
 
