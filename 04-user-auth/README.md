@@ -31,4 +31,10 @@ elm-land add page /sign-in
 
 # Clone the API repo (without history)
 npx degit elm-land/elm-land/examples/05-user-auth/api-server server
+
+# Change the "shared" module
+elm-land customize shared
+
+# Edit the `Effect` module
+elm-land customize effect
 ```
