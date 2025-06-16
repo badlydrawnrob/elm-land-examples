@@ -1,4 +1,4 @@
-module Api.SignIn exposing (Data, post)
+module Api.SignIn exposing (Data, Error, post)
 
 import Effect exposing (Effect)
 import Http
@@ -11,6 +11,9 @@ import Json.Encode as E
 type alias Data =
     { token : String }
 
+type alias Error =
+    { message : String
+    , field : Maybe String}
 
 -- Decoders --------------------------------------------------------------------
 
@@ -31,11 +34,15 @@ Elm's standard way of sending side-effects is `Cmd msg`. We'll need a final
 `Effect.sendCmd` function to convert `Cmd msg` to `Effect msg` the sign-in page
 is expecting!
 
-Later in the guide we can use `Effect msg` for _more_ than just sending commands.
+## Notes
 
+1. #! We've changed from `Http.expectJson` to `Http.expectStringResponse`
+   - This is overkill for me, and doubt I'd use it ...
+   - Although it allows you to inspect the `POST` response body more carefully ...
+   - So you can handle any field errors returned by the Api.
 -}
 post :
-    { onResponse : Result Http.Error Data -> msg
+    { onResponse : Result (List Error) Data -> msg
     , email : String
     , password : String
     }
@@ -55,8 +62,69 @@ post options =
             Http.post
                 { url = endpoint
                 , body = Http.jsonBody body
-                , expect = Http.expectJson options.onResponse decoder
+                , expect =
+                    Http.expectStringResponse
+                        options.onResponse
+                        handleHttpResponse
                 }
     in
     -- Converts any `Cmd msg` into an `Effect msg`
     Effect.sendCmd cmd
+
+handleHttpResponse : Http.Response String -> Result (List Error) Data
+handleHttpResponse response =
+    case response of
+        Http.BadUrl_ _ ->
+            Err
+                [ { message = "Unexpected URL format"
+                  , field = Nothing
+                  }
+                ]
+        
+        Http.Timeout_ ->
+            Err
+                [ { message = "Request timed out, please try again"
+                  , field = Nothing
+                  }
+                ]
+        
+        Http.NetworkError_ ->
+            Err
+                [ { message = "Could not connect, please try again"
+                  , field = Nothing
+                  }
+                ]
+
+        Http.BadStatus_ { statusCode } body ->
+            case D.decodeString errorsDecoder body of
+                Ok errors ->
+                    Err errors
+                
+                Err _ ->
+                    Err
+                        [ { message = "Something unexpected happened"
+                          , field = Nothing
+                          }
+                        ]
+        
+        Http.GoodStatus_ _ body ->
+            case D.decodeString decoder body of
+                Ok data ->
+                    Ok data
+                
+                Err _ ->
+                    Err
+                        [ { message = "Something unexpected happened"
+                          , field = Nothing
+                          }
+                        ]
+
+errorsDecoder : D.Decoder (List Error)
+errorsDecoder =
+    D.field "errors" (D.list errorDecoder)
+
+errorDecoder : D.Decoder Error
+errorDecoder =
+    D.map2 Error
+        (D.field "message" D.string)
+        (D.field "field" (D.maybe D.string)) -- #! Yuck, maybe (use `nullable`?)
