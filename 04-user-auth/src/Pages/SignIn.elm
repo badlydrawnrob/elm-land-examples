@@ -1,5 +1,16 @@
 module Pages.SignIn exposing (Model, Msg, page)
 
+{-| We've got some new imports in this page
+
+1. What's an `Effect Msg`?
+    - Allows us to perform side-effects (similar to `Cmd Msg`)
+2. Why use `Field` types?
+    - He uses an interesting method of `case`ing on the `Field`s
+    - We can specifiy `Attr.type_` and `Html.label` ...
+    - Although it's not much better than a simple `String`.
+
+-}
+
 import Effect exposing (Effect)
 import Route exposing (Route)
 import Html exposing (Html)
