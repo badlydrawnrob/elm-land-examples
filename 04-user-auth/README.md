@@ -22,4 +22,7 @@ about deploying your app for free using Netlify or Vercel.
 ```terminal
 # By default adds `Browser.application`
 elm-land add page /sign-in
+
+# Clone the API repo (without history)
+npx degit elm-land/elm-land/examples/05-user-auth/api-server server
 ```
