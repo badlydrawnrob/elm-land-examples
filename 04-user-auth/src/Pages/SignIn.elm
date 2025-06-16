@@ -4,6 +4,7 @@ module Pages.SignIn exposing (Model, Msg, page)
 
 1. What's an `Effect Msg`?
     - Allows us to perform side-effects (similar to `Cmd Msg`)
+    - We use `Effect.sendCmd cmd` rather than plain `Cmd Msg`
 2. Why use `Field` types?
     - He uses an interesting method of `case`ing on the `Field`s
     - We can specifiy `Attr.type_` and `Html.label` ...
@@ -11,11 +12,13 @@ module Pages.SignIn exposing (Model, Msg, page)
 
 -}
 
+import Api.SignIn
 import Effect exposing (Effect)
 import Route exposing (Route)
 import Html exposing (Html)
 import Html.Attributes as Attr
 import Html.Events
+import Http
 import Page exposing (Page)
 import Shared
 import View exposing (View)
@@ -59,6 +62,7 @@ init () =
 type Msg
     = UserUpdatedInput Field String
     | UserSubmittedForm
+    | SignInApiResponded (Result Http.Error Api.SignIn.Data)
 
 type Field
     = Email
@@ -80,6 +84,20 @@ update msg model =
         
         UserSubmittedForm ->
             ( { model | isSubmittingForm = True }
+            , Api.SignIn.post
+                { onResponse = SignInApiResponded
+                , email = model.email
+                , password = model.password
+                }
+            )
+        
+        SignInApiResponded (Ok { token }) ->
+            ( { model | isSubmittingForm = False }
+            , Effect.none
+            )
+
+        SignInApiResponded (Err httpError) ->
+            ( { model | isSubmittingForm = False }
             , Effect.none
             )
 
@@ -89,7 +107,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 

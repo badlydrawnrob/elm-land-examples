@@ -10,6 +10,12 @@ See your `/Library/code/elm` folder for documentation (or Elm Land website). Thi
 npx elm-land server
 ```
 
+## The API server
+
+> Whenever you're working with a REST API endpoint, we recommend creating a module that takes care of the details.
+
+So ours is `/Api/SignIn.elm` that exposed a `POST` function to our `/api/sign-in` endpoint.
+
 ## Deploying to production
 
 Elm Land projects are most commonly deployed as static websites.
