@@ -30,6 +30,7 @@ errors in both places, but I'm not sure I'd follow this method in future.
 
 1.  <https://tinyurl.com/6d4f2c4-api-server-skeleton> (view / post to Api)
 2.  <https://tinyurl.com/ede98b3-shared-model-effect> (redirect on success)
+3.  <https://tinyurl.com/0e64d20-json-error-response> (fancier error messages)
 
 -}
 
