@@ -5,10 +5,17 @@ module Pages.SignIn exposing (Model, Msg, page)
 1. What's an `Effect Msg`?
     - Allows us to perform side-effects (similar to `Cmd Msg`)
     - We use `Effect.sendCmd cmd` rather than plain `Cmd Msg`
+    - We create a custom `Effect msg` to hold the token in `src/Effect.elm`
 2. Why use `Field` types?
     - He uses an interesting method of `case`ing on the `Field`s
     - We can specifiy `Attr.type_` and `Html.label` ...
     - Although it's not much better than a simple `String`.
+3. What's the `Shared.Model` etc?
+    - @ https://elm.land/concepts/shared
+
+## See the build in stages
+
+1. https://tinyurl.com/6d4f2c4-api-server-skeleton
 
 -}
 
@@ -93,7 +100,7 @@ update msg model =
         
         SignInApiResponded (Ok { token }) ->
             ( { model | isSubmittingForm = False }
-            , Effect.none
+            , Effect.signIn { token = token }
             )
 
         SignInApiResponded (Err httpError) ->
