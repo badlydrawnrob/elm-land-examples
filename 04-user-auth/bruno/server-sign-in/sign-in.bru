@@ -1,0 +1,26 @@
+meta {
+  name: sign-in
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:5000/api/sign-in
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "hello@",
+    "password": "1234"
+  }
+}
+
+docs {
+  # Sign in
+  
+  > 🐞 Server isn't strict! It only checks values are available, it doesn't validate them.
+  
+  Expects an `email` and `password` key.
+}

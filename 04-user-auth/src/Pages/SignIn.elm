@@ -2,11 +2,8 @@ module Pages.SignIn exposing (Model, Msg, page)
 
 {-| We've got some new imports in this page
 
-> In this package we're using fancier error messages.
-> We're relying on our Api to return the list of errors ...
 
-Rather than handling it with Elm. Of course it's ALWAYS a good idea to handle
-errors in both places, but I'm not sure I'd follow this method in future.
+## Elm Land specific imports
 
 1.  What's an `Effect Msg`?
       - Allows us to perform side-effects (similar to `Cmd Msg`)
@@ -18,12 +15,31 @@ errors in both places, but I'm not sure I'd follow this method in future.
       - Although it's not much better than a simple `String`.
 3.  What's the `Shared.Model` etc?
       - @ <https://elm.land/concepts/shared>
-4.  ⚠️ Why use the `Http.Response` type?
-      - By default `Http.Error` doesn't return any `json` field errors
-      - `Http.Response` gives us access to the raw `json` body our Api returns
-      - 👉 I generally handle form errors (and validation) in Elm and check for ...
-          - `BadBody String` (something went wrong with request)
-          - `BadBody String` decoder fails
+
+
+## Error messages
+
+> ⚠️ I don't really like the fancier error messages we're using ...
+> Seems like an unecessary amount of work (granular server error check)
+
+We're relying on our Api to return the list of errors ... rather than handling
+them with Elm. You should ALWAYS check errors in both places, but I don't think
+it's necessary for Elm to know about them (just use Elm to validate!)
+
+`Http.Response` type returns `json` field errors (`Http.Error` doesn't)
+
+  - Gives us access to the raw `json` body our Api returns
+  - However the server _still_ returns errors one at a time sometimes, so it's
+    not that big of an improvement.
+
+Email error checking for is weak:
+
+  - It's only using HTML `type="email"` to validate.
+
+Normally I simply check form errors (and validation) with Elm:
+
+  - `BadBody String` (something went wrong with request)
+  - `BadBody String` decoder fails
 
 
 ## See the build in stages

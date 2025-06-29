@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Elm Land: Sign In tutorial",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

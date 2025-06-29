@@ -68,7 +68,7 @@ update route msg model =
                 , hash = Nothing
                 }
             )
-        
+
         Shared.Msg.SignOut ->
             ( { model | token = Nothing }
             , Effect.none

@@ -1,6 +1,6 @@
 # Elm Land
 
-> ⚠️ Be warned. This has A LOT of dependencies and js gets stale at warp-speed.
+> ⚠️ Be warned: Elm Lang has A LOT of dependencies and js gets stale at warp-speed.
 
 This repo has [some examples](https://elm.land/guide/) I've followed along with and slightly modified. Nothing much different to the [`elm-land` repo](https://github.com/elm-land/elm-land), but handy to have them offline. More examples can be [found here](https://github.com/elm-land/elm-land/tree/main/examples).
 
@@ -15,9 +15,20 @@ Fine for prototyping, reasonably stable, but keep things as simple as possible, 
 
 ## The bad
 
-1. Everything loads from a single `.js` file ...
-    - A SPA [may not run as quickly](https://adamsilver.io/blog/the-problem-with-single-page-applications/) or have other issues
-2. Directly accessing the routes may require [server configuration](https://elm.land/guide/deploying.html#understanding-the-output) to point to `/index.html`.
-3. Without `.editorconfig`, `elm-format` complains of tabs (not spaces)
+### It's all one big file
+
+> Everything loads from a single `.js` file ...
+
+A SPA [may not run as quickly](https://adamsilver.io/blog/the-problem-with-single-page-applications/) or have other issues
+
+### Server configuration (routes)
+
+Directly accessing the routes may require [server configuration](https://elm.land/guide/deploying.html#understanding-the-output) to point to `/index.html`.
+
+### Other
+
+1. Without `.editorconfig`, `elm-format` complains of tabs (not spaces)
+
+
 
 [^1]: The `Url` package is kind of a headache. You can see some of [the routing code](https://github.com/rtfeldman/elm-spa-example/blob/master/src/Route.elm) you'd need to add if done manually. Alternatively there's @lydell's [`elm-app-url`](https://github.com/lydell/elm-app-url/) for simpler routing.
