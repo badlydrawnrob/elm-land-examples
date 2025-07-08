@@ -52,6 +52,7 @@ Email error checking is weak:
 1.  <https://tinyurl.com/6d4f2c4-api-server-skeleton> (view / post to Api)
 2.  <https://tinyurl.com/ede98b3-shared-model-effect> (redirect on success)
 3.  <https://tinyurl.com/0e64d20-json-error-response> (fancier error messages)
+4.  <https://tinyurl.com/365fefa-add-to-local-storage> (ports login/logout)
 
 -}
 
