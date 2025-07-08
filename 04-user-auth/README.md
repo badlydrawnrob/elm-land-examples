@@ -3,10 +3,24 @@
 
 See your `/Library/code/elm` folder for documentation (or Elm Land website). This project uses the "full force" of Elm Land, not just `:view`, `:sandbox`, or `:element` pages.
 
+## Copilot AI Agent
+
+> Consider also adding a `TODO` or Github issues plugin.
+
+**Regarding prompt versioning**: There isn't a built-in versioning system for our conversation, but you could:
+ 
+- Save different versions of files manually
+- Use git commits to track changes
+- Copy code snippets to separate files for comparison
+- Use VS Code's timeline feature to see file history
+
 ## Local development
 
 ```bash
-# Requires Node.js v18+ (https://nodejs.org)
+# Start the server for /api/sign-in
+cd server
+npm start
+# Run the Elm-Land server (from root)
 npx elm-land server
 ```
 
@@ -25,7 +39,7 @@ about deploying your app for free using Netlify or Vercel.
 
 ## Commands
 
-```terminal
+```bash
 # By default adds `Browser.application`
 elm-land add page /sign-in
 

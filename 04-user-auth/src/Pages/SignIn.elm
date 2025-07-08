@@ -19,24 +19,29 @@ module Pages.SignIn exposing (Model, Msg, page)
 
 ## Error messages
 
-> ⚠️ I don't really like the fancier error messages we're using ...
-> Seems like an unecessary amount of work (granular server error check)
+> ⚠️ I don't like the fancier error messages we're using ... they seem
+> an unecessary amount of work (to receive errors from server) rather than
+> simply validating in Elm.
 
-We're relying on our Api to return the list of errors ... rather than handling
-them with Elm. You should ALWAYS check errors in both places, but I don't think
-it's necessary for Elm to know about them (just use Elm to validate!)
+We're relying on our Api to return a granular list of errors. You should ALWAYS
+check errors in both client-side and server-side, but I don't think it's necessary
+for Elm to know about server-side type errors. This method also isn't a silver
+bullet, as I don't expect server-side to display all errors at once.
 
 `Http.Response` type returns `json` field errors (`Http.Error` doesn't)
 
   - Gives us access to the raw `json` body our Api returns
-  - However the server _still_ returns errors one at a time sometimes, so it's
-    not that big of an improvement.
+  - This particular server _still_ returns errors one at a time sometimes ...
+  - So it's not that big of an improvement.
 
-Email error checking for is weak:
+Email error checking is weak:
 
   - It's only using HTML `type="email"` to validate.
 
-Normally I simply check form errors (and validation) with Elm:
+
+### Just use Elm to check errors and validate forms!
+
+> Check your types and data with Elm and respond to server errors:
 
   - `BadBody String` (something went wrong with request)
   - `BadBody String` decoder fails
@@ -173,10 +178,10 @@ view model =
 
 viewPage : Model -> Html Msg
 viewPage model =
-    Html.div [ Attr.class "columns is-mobile is-centered" ]
+    Html.div [ Attr.class "columns is-mobile is-centered has-background-dark has-text-light" ]
         [ Html.div [ Attr.class "column is-narrow" ]
             [ Html.div [ Attr.class "section" ]
-                [ Html.h1 [ Attr.class "title" ] [ Html.text "Sign in" ]
+                [ Html.h1 [ Attr.class "title has-text-light" ] [ Html.text "Sign in" ]
                 , viewForm model
                 ]
             ]
@@ -185,7 +190,7 @@ viewPage model =
 
 viewForm : Model -> Html Msg
 viewForm model =
-    Html.form [ Attr.class "box", Html.Events.onSubmit UserSubmittedForm ]
+    Html.form [ Attr.class "box has-background-dark has-text-light form-dark-theme", Html.Events.onSubmit UserSubmittedForm ]
         [ viewFormInput
             { field = Email
             , value = model.email
@@ -259,7 +264,7 @@ viewFormControls model =
             [ Html.div
                 [ Attr.class "control" ]
                 [ Html.button
-                    [ Attr.class "button is-link"
+                    [ Attr.class "button is-danger"
                     , Attr.disabled model.isSubmittingForm
                     , Attr.classList [ ( "is-loading", model.isSubmittingForm ) ]
                     ]

@@ -5,8 +5,8 @@ module Effect exposing
     , pushRoute, replaceRoute
     , pushRoutePath, replaceRoutePath
     , loadExternalUrl, back
-    , signIn, signOut
     , map, toCmd
+    , signIn, signOut
     )
 
 {-|
@@ -214,13 +214,15 @@ toCmd options effect =
                 |> Task.perform options.fromSharedMsg
 
 
--- #! SHARED (custom)
+
+-- #! SHARED (custom) ----------------------------------------------------------
+
 
 signIn : { token : String } -> Effect msg
 signIn options =
     SendSharedMsg (Shared.Msg.SignIn options)
 
+
 signOut : Effect msg
 signOut =
     SendSharedMsg Shared.Msg.SignOut
-
