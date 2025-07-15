@@ -1,10 +1,92 @@
 /* Custom styles for the dark theme sign-in form */
 
+:root {
+  --color-card-d: #555;
+  --color-card-dd: #444;
+}
 html {
   background-color: #363636;
+}
+
+body {
+
 }
 
 .form-dark-theme {
   border: 2px solid white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive CSS Grid Layout */
+.page-layout {
+  display: grid;
+  min-height: 100vh;
+  padding: 1rem;
+  gap: 2rem;
+  
+  /* Mobile: single column */
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "nav"
+    "intro"
+    "main";
+
+  @media (min-width: 768px) {
+    margin: 0 auto;
+    padding: 1rem 0;
+    width: 740px;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "nav intro"
+      "nav main";
+  }
+}
+
+.page-layout > * {
+  background: var(--color-card-dd);
+}
+
+/* Using named grid areas for layout as our base */
+.page-nav { grid-area: nav; }
+.page-header { grid-area: header; }
+.page-intro { grid-area: intro; }
+.page-main { grid-area: main; }
+
+/* But we use `-main` as a subgrid for the main content */
+.page-main {
+  background: transparent;
+  border: 2px dashed var(--color-card-d);
+  display: grid;
+  grid-column: 1 / -1; /* Change from `grid-area` to span all columns */
+  grid-template-columns: subgrid; /* Use parent grid for columns only */
+}
+
+/* Child elements that can span across columns */
+.span-full {
+  opacity: 0.8;
+  background: var(--color-card-dd);
+  grid-column: 1 / -1; /* Span all columns */
+}
+
+.form-wrapper {
+  grid-column: 2 / 3;
+  max-width: 400px;
+}
+
+
+/* Footer: change from `grid-area` last row to it's full width row */
+
+.page-footer {
+  background: var(--color-card-dd);
+  padding: 2rem;
+
+  @media (min-width: 768px) {
+    p {
+      margin: 0 auto;
+      width: 740px;
+    }
+  }
 }

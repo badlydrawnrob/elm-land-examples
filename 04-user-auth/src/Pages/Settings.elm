@@ -1,4 +1,4 @@
-module Pages.Home_ exposing (Model, Msg, page)
+module Pages.Settings exposing (Model, Msg, page)
 
 import Auth
 import Effect exposing (Effect)
@@ -67,9 +67,9 @@ subscriptions model =
 
 view : Model -> View Msg
 view model =
-    { title = "Pages.Home_"
+    { title = "Pages.Settings"
     , body =
         [ Html.p [ Attr.class "has-text-light" ]
-            [ Html.text "Home page" ]
+            [ Html.text "Settings page" ]
         ]
     }

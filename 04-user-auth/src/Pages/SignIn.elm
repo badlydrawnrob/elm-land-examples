@@ -179,13 +179,33 @@ view model =
 
 viewPage : Model -> Html Msg
 viewPage model =
-    Html.div [ Attr.class "columns is-mobile is-centered has-background-dark has-text-light" ]
-        [ Html.div [ Attr.class "column is-narrow" ]
-            [ Html.div [ Attr.class "section" ]
-                [ Html.h1 [ Attr.class "title has-text-light" ] [ Html.text "Sign in" ]
-                , viewForm model
+    Html.div [ Attr.class "page" ]
+        [ Html.div [ Attr.class "page-layout has-text-light" ]
+            [ Html.nav [ Attr.class "page-nav" ]
+                [ Html.ul []
+                    [ Html.li [] [ Html.a [ Attr.class "has-text-light" ] [ Html.text "Home" ] ]
+                    , Html.li [] [ Html.a [ Attr.class "has-text-light" ] [ Html.text "Sign in" ] ]
+                    , Html.li [] [ Html.a [ Attr.class "has-text-light" ] [ Html.text "Other" ] ]
+                    ]
+                ]
+            , Html.header [ Attr.class "page-header" ]
+                [ Html.h1 [ Attr.class "title has-text-light" ]
+                    [ Html.text "Sign in" ]
+                ]
+            , Html.section [ Attr.class "page-intro" ]
+                [ Html.p [] [ Html.text "introduction" ]
+                ]
+            , Html.main_ [ Attr.class "page-main" ]
+                [ Html.div [ Attr.class "form-wrapper" ]
+                    [ viewForm model ]
+                , Html.div [ Attr.class "span-full" ]
+                    [ Html.p []
+                        [ Html.text "This is a full-width span." ]
+                    ]
                 ]
             ]
+        , Html.footer [ Attr.class "page-footer has-text-light" ]
+            [ Html.p [] [ Html.text "Footer content here" ] ]
         ]
 
 
