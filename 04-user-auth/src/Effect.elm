@@ -226,9 +226,16 @@ toCmd options effect =
 -- #! SHARED (custom) ----------------------------------------------------------
 
 
-signIn : { token : String } -> Effect msg
-signIn options =
-    SendSharedMsg (Shared.Msg.SignIn options)
+signIn :
+    { token : String
+    , id : String
+    , name : String
+    , profileImageUrl : String
+    , email : String
+    }
+    -> Effect msg
+signIn user =
+    SendSharedMsg (Shared.Msg.SignIn user)
 
 
 signOut : Effect msg
@@ -243,6 +250,9 @@ signOut =
 -- Now when a page sends Effect.signIn, we use Effect.batch to redirect them to
 -- the homepage and save that user token in local storage. We do the same for
 -- Effect.signOut, but we clear the token in local storage instead.
+--
+-- @ https://www.freecodecamp.org/news/use-local-storage-in-modern-applications/
+-- @ https://developer.chrome.com/docs/devtools/storage/localstorage
 
 
 port sendToLocalStorage :
@@ -252,17 +262,31 @@ port sendToLocalStorage :
     -> Cmd msg
 
 
-saveUser : String -> Effect msg
-saveUser token =
+saveUser :
+    { token : String
+    , id : String
+    , name : String
+    , profileImageUrl : String
+    , email : String
+    }
+    -> Effect msg
+saveUser user =
     SendToLocalStorage
-        { key = "token"
-        , value = Json.Encode.string token
+        { key = "user"
+        , value =
+            Json.Encode.object
+                [ ( "token", Json.Encode.string user.token )
+                , ( "id", Json.Encode.string user.id )
+                , ( "name", Json.Encode.string user.name )
+                , ( "profileImageUrl", Json.Encode.string user.profileImageUrl )
+                , ( "email", Json.Encode.string user.email )
+                ]
         }
 
 
 clearUser : Effect msg
 clearUser =
     SendToLocalStorage
-        { key = "token"
+        { key = "user"
         , value = Json.Encode.null
         }

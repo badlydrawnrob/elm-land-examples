@@ -1,6 +1,11 @@
-module Shared.Model exposing (Model)
+module Shared.Model exposing
+    ( Model
+    , User
+    )
 
 {-| -}
+
+import Json.Decode exposing (string)
 
 
 {-| Normally, this value would live in "Shared.elm"
@@ -11,4 +16,13 @@ own file, so they can be imported by `Effect.elm`
 
 -}
 type alias Model =
-    { token : Maybe String }
+    { user : Maybe User }
+
+
+type alias User =
+    { token : String
+    , id : String
+    , name : String
+    , profileImageUrl : String
+    , email : String
+    }
