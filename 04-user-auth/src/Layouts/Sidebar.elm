@@ -34,12 +34,28 @@ Useful if we need a light/dark mode, or other metadata.
 We can use this same strategy as the `view` function (in `layout`) to pass in
 data to `init`, `update`, or `subscriptions`.
 
+
+## Understanding the role of "contentMsg"
+
+> #! For simplicity sake, you could AVOID using messages in your layout.
+
+Instead of a normal `View Msg` being returned, it's a `View contentMsg`.
+One of the contstraints of Elm is that _lists cannot return items of different
+types_.
+
+If we want out HTML to send layout messages _and_ page messages, we're going to
+need to convert them into ONE common type `contentMsg`.
+
+For that reason we'd need to use `Html.map toContentMsg` whenever we use a
+`Html Msg` within a layout file.
+
 -}
 
 import Auth
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes exposing (alt, class, classList, src, style)
+import Html.Events
 import Json.Decode exposing (string)
 import Layout exposing (Layout)
 import Route exposing (Route)
@@ -84,15 +100,15 @@ init _ =
 
 
 type Msg
-    = ReplaceMe
+    = UserClickedSignOut
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        ReplaceMe ->
+        UserClickedSignOut ->
             ( model
-            , Effect.none
+            , Effect.signOut
             )
 
 
@@ -122,6 +138,7 @@ view props route { toContentMsg, model, content } =
                 { user = props.user
                 , route = route
                 }
+                |> Html.map toContentMsg
             , viewMainContent
                 { title = props.title
                 , content = content
@@ -131,7 +148,7 @@ view props route { toContentMsg, model, content } =
     }
 
 
-viewSidebar : { user : Auth.User, route : Route () } -> Html msg
+viewSidebar : { user : Auth.User, route : Route () } -> Html Msg
 viewSidebar { user, route } =
     Html.aside
         [ class "is-flex is-flex-direction-column p-2"
@@ -186,9 +203,12 @@ viewSidebarLinks route =
         ]
 
 
-viewSignOutButton : Auth.User -> Html msg
+viewSignOutButton : Auth.User -> Html Msg
 viewSignOutButton user =
-    Html.button [ class "button is-text is-fullwidth" ]
+    Html.button
+        [ class "button is-text is-fullwidth"
+        , Html.Events.onClick UserClickedSignOut
+        ]
         [ Html.div [ class "is-flex has-text-light is-align-items-center" ]
             [ Html.figure [ class "image is-24x24" ]
                 [ Html.img
