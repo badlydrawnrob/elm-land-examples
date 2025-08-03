@@ -61,6 +61,7 @@ Email error checking is weak:
 5.  <https://tinyurl.com/a4ddfd4-auth-only-pages> (auth-only pages)
 6.  <https://tinyurl.com/049854c-get-and-save-user> (get user after signing in)
 7.  <https://tinyurl.com/26fa214-add-sidebar-layout> (add sidebar layout)
+8.  <https://tinyurl.com/ddb9fd9-fix-sign-out> (sign out with Effect)
 
 -}
 
