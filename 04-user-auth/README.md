@@ -1,6 +1,8 @@
 # user-auth
 > Built with [Elm Land](https://elm.land) 🌈
 
+**See `/sign-in` page for most notes.**
+
 See your `/Library/code/elm` folder for documentation (or Elm Land website). This project uses the "full force" of Elm Land, not just `:view`, `:sandbox`, or `:element` pages.
 
 We don't want our `/sign-in` page to be auth-only, or our users won't be able to access it when they are signed out.
@@ -17,6 +19,12 @@ We don't want our `/sign-in` page to be auth-only, or our users won't be able to
 - Use VS Code's timeline feature to see file history
 
 ### Layout with CSS grid
+
+> I've changed the layout from documentation
+
+A slightly different UI but the same functionality. It's just to practice css grid, so keeping it simple!
+
+#### Ai response
 
 > Is it better to use `auto-fit` in my case?
 

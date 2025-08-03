@@ -3,6 +3,7 @@
 :root {
   --color-card-d: #555;
   --color-card-dd: #444;
+  --color-card-ddd: #000;
 }
 html {
   background-color: #363636;
@@ -89,4 +90,15 @@ body {
       width: 740px;
     }
   }
+}
+
+/* Override Bulma's default styles */
+.hero-body {
+  background-color: var(--color-card-ddd);
+}
+
+.menu-list a:hover,
+.menu-list a.is-active,
+.button.is-text:hover {
+  background-color: var(--color-card-ddd);
 }
