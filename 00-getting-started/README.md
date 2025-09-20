@@ -1,4 +1,5 @@
-# app
+# Getting Started
+
 > Built with [Elm Land](https://elm.land) 🌈
 
 ## Local development

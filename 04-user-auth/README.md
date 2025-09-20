@@ -1,4 +1,5 @@
-# user-auth
+# User Authentication
+
 > Built with [Elm Land](https://elm.land) 🌈
 
 **See `/sign-in` page for most notes.**

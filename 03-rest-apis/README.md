@@ -1,4 +1,5 @@
-# rest-apis
+# Rest APIs
+
 > Built with [Elm Land](https://elm.land) 🌈
 
 ## Local development

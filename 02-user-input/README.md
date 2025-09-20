@@ -1,4 +1,5 @@
-# user-input
+# User Input
+
 > Built with [Elm Land](https://elm.land) 🌈
 
 ## Local development

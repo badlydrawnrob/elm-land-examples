@@ -10,13 +10,17 @@
         "html": { "lang": "en" },
         "head": {}
       },
-      "title": "Elm Land",
+      "title": "Elm Land: Query Parameters",
       "meta": [
         { "charset": "UTF-8" },
         { "http-equiv": "X-UA-Compatible", "content": "IE=edge" },
         { "name": "viewport", "content": "width=device-width, initial-scale=1.0" }
       ],
-      "link": [],
+      "link": [
+        { "rel": "icon", "href": "/favicon.png" },
+        { "rel": "stylesheet", "href": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" },
+        { "rel": "stylesheet", "href": "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" }
+      ],
       "script": []
     },
     "router": {
